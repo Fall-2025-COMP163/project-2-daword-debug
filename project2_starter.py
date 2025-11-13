@@ -69,7 +69,7 @@ class Character:
         """Initialize basic character attributes"""
         # TODO: Set the character's name, health, strength, and magic
         # These should be stored as instance variables
-        #pass
+     
         
     def attack(self, target):
         damage = self.strength
@@ -86,7 +86,7 @@ class Character:
         # TODO: Implement basic attack
         # Damage should be based on self.strength
         # Use target.take_damage(damage) to apply damage
-        #pass
+    
         
     def take_damage(self, damage):
         if self.health > 0:
@@ -101,7 +101,7 @@ class Character:
         # TODO: Implement taking damage
         # Reduce self.health by damage amount
         # Make sure health doesn't go below 0
-        #pass
+   
         
     def display_stats(self):
         print(f" Character's current for: {self.name}")
@@ -114,7 +114,7 @@ class Character:
         """
         # TODO: Print character's name, health, strength, and magic
         # Make it look nice with formatting
-        #pass
+    
 
 class Player(Character):
     """
@@ -123,7 +123,7 @@ class Player(Character):
     """
     
     def __init__(self, name, character_class, health, strength, magic):
-        super().__init__(self)
+        super().__init__(name, health, strength, magic)
         self.level = 1
         self.experience = 0
         self.character_class = character_class
@@ -135,7 +135,7 @@ class Player(Character):
         # TODO: Call super().__init__() with the basic character info
         # TODO: Store the character_class (like "Warrior", "Mage", etc.)
         # TODO: Add any other player-specific attributes (level, experience, etc.)
-        #pass
+       
         
     def display_stats(self):
         super().display
@@ -148,7 +148,7 @@ class Player(Character):
         """
         # TODO: Call the parent's display_stats method using super()
         # TODO: Then print additional player info like class and level
-        #pass
+        
 
 class Warrior(Player):
     """
@@ -157,7 +157,7 @@ class Warrior(Player):
     """
     
     def __init__(self, name):
-        super.__init__(self)
+        super.__init__(name, "Warrior", 120, 15, 5)
         self.health = 120
         self.strength = 15
         self.magic = 5
@@ -215,7 +215,7 @@ class Mage(Player):
     """
     
     def __init__(self, name):
-        super().__init__(self)
+        super().__init__(name, "Mage", 80, 8, 20)
         self.health = 80
         self.magic = 20
         self.strength = 8
@@ -266,7 +266,7 @@ class Rogue(Player):
     """
     
     def __init__(self, name):
-        super().__init__(self)
+        super().__init__(name, "Rogue", 90, 12, 10)
         self.health = 90
         self.strength = 12
         self.magic = 10
