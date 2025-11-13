@@ -170,9 +170,10 @@ class Warrior(Player):
         #pass
         
     def attack(self, target):
-        damage = self.strength
+        damage = self.strength 
         if self.character_class.lower() == "warrior":
-            damage += 5
+            damage = self.strength + 5
+            
 
         target.take_damage(damage)
 
@@ -230,7 +231,7 @@ class Mage(Player):
     def attack(self, target):
         damage = self.magic
         if self.character_class.lower() == "Mage":
-            damage += 5
+            damage = self.magic + 5
         target.take_damage(damage)
         print(f"{self.name} attacks {target.name} and deals damage!")
 
@@ -260,6 +261,7 @@ class Mage(Player):
         #pass
 
 class Rogue(Player):
+    import random
     """
     Rogue class - quick and sneaky fighter.
     Inherits from Player.
@@ -278,12 +280,12 @@ class Rogue(Player):
         # Suggested stats: health=90, strength=12, magic=10
         
     #used ai to format how to write the random number
-    import random   
+       
     def attack(self, target):
         damage = self.strength
         roll = random.randint(1, 10)
         if self.character_class.lower() == "rogue":
-            damage += 5
+            damage = self.strength + 5
         if roll <= 3:
             damage *= 2
 
