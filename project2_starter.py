@@ -230,7 +230,7 @@ class Mage(Player):
         
     def attack(self, target):
         damage = self.magic
-        if self.character_class.lower() == "Mage":
+        if self.character_class.lower() == "mage":
             damage = self.magic + 5
         target.take_damage(damage)
         print(f"{self.name} attacks {target.name} and deals damage!")
@@ -246,6 +246,8 @@ class Mage(Player):
         
     def fireball(self, target):
         damage = self.magic * 2
+        target.take_damage(damage)
+
         print(f"{self.name} uses fireball on {target.name}")
 
         if target.health <= 0:
@@ -259,9 +261,9 @@ class Mage(Player):
         # TODO: Implement fireball spell
         # Should do magic-based damage with bonus
         #pass
-
+import random
 class Rogue(Player):
-    import random
+    
     """
     Rogue class - quick and sneaky fighter.
     Inherits from Player.
@@ -282,13 +284,15 @@ class Rogue(Player):
     #used ai to format how to write the random number
        
     def attack(self, target):
-        import random
+
         damage = self.strength
         roll = random.randint(1, 10)
         if self.character_class.lower() == "rogue":
             damage = self.strength + 5
         if roll <= 3:
             damage *= 2
+        else:
+            damage = self.strength
 
         target.take_damage(damage)
         print(f"{self.name} attacks {target.name} and deals {damage} damage!")
@@ -312,7 +316,7 @@ class Rogue(Player):
     def sneak_attack(self, target):
         damage = self.strength * 2
         print(f"{self.name} uses a sneak attack on {target.name} ")
-
+        target.take_damage(damage)
         if target.health <= 0:
             target.health = 0
         print(f"{target.name} has been defeated!")
