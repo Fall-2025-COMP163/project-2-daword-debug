@@ -138,7 +138,7 @@ class Player(Character):
        
         
     def display_stats(self):
-        super().display
+        super().display_stats()
         print(f"This is your level: {self.level}")
         print(f"This is your experience: {self.experience}")
         print(f"This is your Character Class: {self.character_class}")
@@ -157,7 +157,7 @@ class Warrior(Player):
     """
     
     def __init__(self, name):
-        super.__init__(name, "Warrior", 120, 15, 5)
+        super().__init__(name, "Warrior", 120, 15, 5)
         self.health = 120
         self.strength = 15
         self.magic = 5
@@ -230,7 +230,7 @@ class Mage(Player):
     def attack(self, target):
         damage = self.magic
         if self.character_class.lower() == "Mage":
-            damge += 5
+            damage += 5
         target.take_damage(damage)
         print(f"{self.name} attacks {target.name} and deals damage!")
 
@@ -276,14 +276,14 @@ class Rogue(Player):
         """
         # TODO: Call super().__init__() with rogue-appropriate stats
         # Suggested stats: health=90, strength=12, magic=10
-        #pass
+        
     #used ai to format how to write the random number
     import random   
     def attack(self, target):
         damage = self.strength
+        roll = random.randint(1, 10)
         if self.character_class.lower() == "rogue":
             damage += 5
-            roll = random.randint(1, 10)
         if roll <= 3:
             damage *= 2
 
@@ -328,6 +328,7 @@ class Weapon:
     """
     
     def __init__(self, name, damage_bonus):
+        self.name = name
         self.damage_bonus = damage_bonus
     def __str__(self):
         return f"{self.name} (Damage Bonus: {self.damage_bonus})"
