@@ -282,6 +282,7 @@ class Rogue(Player):
     #used ai to format how to write the random number
        
     def attack(self, target):
+        import random
         damage = self.strength
         roll = random.randint(1, 10)
         if self.character_class.lower() == "rogue":
