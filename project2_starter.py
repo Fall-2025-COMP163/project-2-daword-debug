@@ -69,7 +69,7 @@ class Character:
         """Initialize basic character attributes"""
         # TODO: Set the character's name, health, strength, and magic
         # These should be stored as instance variables
-        pass
+        #pass
         
     def attack(self, target):
         damage = self.strength
@@ -86,7 +86,7 @@ class Character:
         # TODO: Implement basic attack
         # Damage should be based on self.strength
         # Use target.take_damage(damage) to apply damage
-        pass
+        #pass
         
     def take_damage(self, damage):
         if self.health > 0:
@@ -101,7 +101,7 @@ class Character:
         # TODO: Implement taking damage
         # Reduce self.health by damage amount
         # Make sure health doesn't go below 0
-        pass
+        #pass
         
     def display_stats(self):
         print(f" Character's current for: {self.name}")
@@ -114,7 +114,7 @@ class Character:
         """
         # TODO: Print character's name, health, strength, and magic
         # Make it look nice with formatting
-        pass
+        #pass
 
 class Player(Character):
     """
@@ -135,16 +135,20 @@ class Player(Character):
         # TODO: Call super().__init__() with the basic character info
         # TODO: Store the character_class (like "Warrior", "Mage", etc.)
         # TODO: Add any other player-specific attributes (level, experience, etc.)
-        pass
+        #pass
         
     def display_stats(self):
+        super().display
+        print(f"This is your level: {self.level}")
+        print(f"This is your experience: {self.experience}")
+        print(f"This is your Character Class: {self.character_class}")
         """
         Override the parent's display_stats to show additional player info.
         Should show everything the parent shows PLUS player-specific info.
         """
         # TODO: Call the parent's display_stats method using super()
         # TODO: Then print additional player info like class and level
-        pass
+        #pass
 
 class Warrior(Player):
     """
@@ -153,15 +157,29 @@ class Warrior(Player):
     """
     
     def __init__(self, name):
+        super.__init__(self)
+        self.health = 120
+        self.strength = 15
+        self.magic = 5
         """
         Create a warrior with appropriate stats.
         Warriors should have: high health, high strength, low magic
         """
         # TODO: Call super().__init__() with warrior-appropriate stats
         # Suggested stats: health=120, strength=15, magic=5
-        pass
+        #pass
         
     def attack(self, target):
+        damage = self.strength
+        if self.character_class.lower() == "warrior":
+            damage += 5
+
+        target.take_damage(damage)
+
+        print(f"{self.name} attacks {target.name} and deals with damage!")
+
+        #used ai to format the if statement
+        
         """
         Override the basic attack to make it warrior-specific.
         Warriors should do extra physical damage.
@@ -169,15 +187,26 @@ class Warrior(Player):
         # TODO: Implement warrior attack
         # Should do more damage than basic attack
         # Maybe strength + 5 bonus damage?
-        pass
+        #pass
         
     def power_strike(self, target):
+        damage = self.strength * 2
+        print(f"{self.name} uses Power Strike on {target.name}")
+
+        target.health = target.health - damage 
+        print(f"What a Power Srtike! {target.name} takes {damage} damage")
+
+        if target.health <= 0:
+            target.health = 0
+            print(f"{target.name} has lost the battle!")
+
+
         """
         Special warrior ability - a powerful attack that does extra damage.
         """
         # TODO: Implement power strike
         # Should do significantly more damage than regular attack
-        pass
+        #pass
 
 class Mage(Player):
     """
@@ -186,30 +215,49 @@ class Mage(Player):
     """
     
     def __init__(self, name):
+        super().__init__(self)
+        self.health = 80
+        self.magic = 20
+        self.strength = 8
         """
         Create a mage with appropriate stats.
         Mages should have: low health, low strength, high magic
         """
         # TODO: Call super().__init__() with mage-appropriate stats
         # Suggested stats: health=80, strength=8, magic=20
-        pass
+        #pass
         
     def attack(self, target):
+        damage = self.magic
+        if self.character_class.lower() == "Mage":
+            damge += 5
+        target.take_damage(damage)
+        print(f"{self.name} attacks {target.name} and deals damage!")
+
+
         """
         Override the basic attack to make it magic-based.
         Mages should use magic for damage instead of strength.
         """
         # TODO: Implement mage attack
         # Should use self.magic for damage calculation instead of strength
-        pass
+        #pass
         
     def fireball(self, target):
+        damage = self.magic * 2
+        print(f"{self.name} uses fireball on {target.name}")
+
+        if target.health <= 0:
+            target.health = 0
+        print(f"{target.name} has been defeated!")
+
+
         """
         Special mage ability - a powerful magical attack.
         """
         # TODO: Implement fireball spell
         # Should do magic-based damage with bonus
-        pass
+        #pass
 
 class Rogue(Player):
     """
@@ -218,15 +266,37 @@ class Rogue(Player):
     """
     
     def __init__(self, name):
+        super().__init__(self)
+        self.health = 90
+        self.strength = 12
+        self.magic = 10
         """
         Create a rogue with appropriate stats.
         Rogues should have: medium health, medium strength, medium magic
         """
         # TODO: Call super().__init__() with rogue-appropriate stats
         # Suggested stats: health=90, strength=12, magic=10
-        pass
-        
+        #pass
+    #used ai to format how to write the random number
+    import random   
     def attack(self, target):
+        damage = self.strength
+        if self.character_class.lower() == "rogue":
+            damage += 5
+            roll = random.randint(1, 10)
+        if roll <= 3:
+            damage *= 2
+
+        target.take_damage(damage)
+        print(f"{self.name} attacks {target.name} and deals {damage} damage!")
+
+        if target.health <= 0:
+            target.health = 0
+        print(f"{target.name} has been defeated!")
+          
+
+    
+
         """
         Override the basic attack to make it rogue-specific.
         Rogues should have a chance for extra damage (critical hits).
@@ -234,15 +304,22 @@ class Rogue(Player):
         # TODO: Implement rogue attack
         # Could add a chance for critical hit (double damage)
         # Hint: use random.randint(1, 10) and if result <= 3, it's a crit
-        pass
+        #pass
         
     def sneak_attack(self, target):
+        damage = self.strength * 2
+        print(f"{self.name} uses a sneak attack on {target.name} ")
+
+        if target.health <= 0:
+            target.health = 0
+        print(f"{target.name} has been defeated!")
+        
         """
         Special rogue ability - guaranteed critical hit.
         """
         # TODO: Implement sneak attack
         # Should always do critical damage
-        pass
+        #pass
 
 class Weapon:
     """
@@ -251,18 +328,27 @@ class Weapon:
     """
     
     def __init__(self, name, damage_bonus):
+        self.damage_bonus = damage_bonus
+    def __str__(self):
+        return f"{self.name} (Damage Bonus: {self.damage_bonus})"
+    #used ai to find how to write __str__
+
+
         """
         Create a weapon with a name and damage bonus.
         """
         # TODO: Store weapon name and damage bonus
-        pass
+        #pass
         
     def display_info(self):
+
+        print(f"Weapon Name   : {self.name}")
+        print(f"Damage Bonus  : {self.damage_bonus}")
         """
         Display information about this weapon.
         """
         # TODO: Print weapon name and damage bonus
-        pass
+        #pass
 
 # ============================================================================
 # MAIN PROGRAM FOR TESTING (YOU CAN MODIFY THIS FOR TESTING)
