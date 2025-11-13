@@ -1,7 +1,7 @@
 """
 COMP 163 - Project 2: Character Abilities Showcase
-Name: [Your Name Here]
-Date: [Date]
+Name: [Darin Word]
+Date: [09/12/2025]
 
 AI Usage: [Document any AI assistance used]
 Example: AI helped with inheritance structure and method overriding concepts
@@ -60,12 +60,22 @@ class Character:
     """
     
     def __init__(self, name, health, strength, magic):
+        self.name = name
+        self.health = health
+        self.strength = strength
+        self.magic = magic
+    
+
         """Initialize basic character attributes"""
         # TODO: Set the character's name, health, strength, and magic
         # These should be stored as instance variables
         pass
         
     def attack(self, target):
+        damage = self.strength
+        target.take_damage(damage)
+        print(f'{self.name} starts attacking {target.name} does {damage} to him')
+
         """
         Basic attack method that all characters can use.
         This method should:
@@ -79,6 +89,11 @@ class Character:
         pass
         
     def take_damage(self, damage):
+        if self.health > 0:
+            self.health = self.health - damage 
+            if self.health < 0:
+                self.health = 0
+
         """
         Reduces this character's health by the damage amount.
         Health should never go below 0.
@@ -89,6 +104,11 @@ class Character:
         pass
         
     def display_stats(self):
+        print(f" Character's current for: {self.name}")
+        print(f"Health    : {self.health}")
+        print(f"Strength  : {self.strength}")
+        print(f"Magic     : {self.magic}")
+        
         """
         Prints the character's current stats in a nice format.
         """
@@ -103,6 +123,11 @@ class Player(Character):
     """
     
     def __init__(self, name, character_class, health, strength, magic):
+        super().__init__(self)
+        self.level = 1
+        self.experience = 0
+        self.character_class = character_class
+
         """
         Initialize a player character.
         Should call the parent constructor and add player-specific attributes.
