@@ -157,6 +157,8 @@ class Warrior(Player):
     """
     
     def __init__(self, name):
+                #Initialize Warrior with set stats
+
         super().__init__(name, "Warrior", 120, 15, 5)
         self.health = 120
         self.strength = 15
@@ -170,6 +172,7 @@ class Warrior(Player):
         #pass
         
     def attack(self, target):
+        #Warrior gets +5 damage
         damage = self.strength 
         if self.character_class.lower() == "warrior":
             damage = self.strength + 5
@@ -191,9 +194,10 @@ class Warrior(Player):
         #pass
         
     def power_strike(self, target):
+         #Power strike doubles strength damage
         damage = self.strength * 2
         print(f"{self.name} uses Power Strike on {target.name}")
-
+          #Deal damage
         target.health = target.health - damage 
         print(f"What a Power Srtike! {target.name} takes {damage} damage")
 
@@ -216,6 +220,7 @@ class Mage(Player):
     """
     
     def __init__(self, name):
+                #Initialize Mage with set stats
         super().__init__(name, "Mage", 80, 8, 20)
         self.health = 80
         self.magic = 20
@@ -229,6 +234,7 @@ class Mage(Player):
         #pass
         
     def attack(self, target):
+                # Mage uses magic instead of strength
         damage = self.magic
         if self.character_class.lower() == "mage":
             damage = self.magic + 5
@@ -245,6 +251,7 @@ class Mage(Player):
         #pass
         
     def fireball(self, target):
+                #Fireball doubles magic damage
         damage = self.magic * 2
         target.take_damage(damage)
 
@@ -270,6 +277,7 @@ class Rogue(Player):
     """
     
     def __init__(self, name):
+                #Initialize Rogue stats
         super().__init__(name, "Rogue", 90, 12, 10)
         self.health = 90
         self.strength = 12
@@ -287,6 +295,7 @@ class Rogue(Player):
 
         damage = self.strength
         roll = random.randint(1, 10)
+            #Determine random crit chanc
         if self.character_class.lower() == "rogue":
             damage = self.strength + 5
         if roll <= 3:
@@ -296,10 +305,18 @@ class Rogue(Player):
 
         target.take_damage(damage)
         print(f"{self.name} attacks {target.name} and deals {damage} damage!")
-
+        #Crit hit if roll <= 3
         if target.health <= 0:
             target.health = 0
-        print(f"{target.name} has been defeated!")
+            print(f"{target.name} has been defeated!")
+        else:
+            damage = self.strength
+    
+        
+    
+        
+
+    
           
 
     
@@ -314,6 +331,8 @@ class Rogue(Player):
         #pass
         
     def sneak_attack(self, target):
+                # Guaranteed critical hit
+
         damage = self.strength * 2
         print(f"{self.name} uses a sneak attack on {target.name} ")
         target.take_damage(damage)
@@ -333,6 +352,8 @@ class Weapon:
     Weapon class to demonstrate composition.
     Characters can HAVE weapons (composition, not inheritance).
     """
+            #Store weapon attributes
+
     
     def __init__(self, name, damage_bonus):
         self.name = name
